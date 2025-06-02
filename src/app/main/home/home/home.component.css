@@ -1,0 +1,42 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.post-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+mat-card-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+mat-card-subtitle {
+  font-style: italic;
+  color: #555;
+}
+
+mat-card-content p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.no-posts {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 18px;
+  color: #888;
+}
+
+.no-posts mat-icon {
+  font-size: 40px;
+  color: #bbb;
+  display: block;
+  margin-bottom: 10px;
+}

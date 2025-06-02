@@ -1,0 +1,32 @@
+<mat-toolbar color="primary" class="header-toolbar">
+
+  <span class="logo">
+    
+    <span class="logo-text">SocialApp</span>
+  </span>
+
+
+  <span class="spacer"></span>
+
+
+  <ng-container *ngIf="!isLoggedIn; else loggedInBlock">
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-stroked-button color="accent" routerLink="/signup">Signup</button>
+  </ng-container>
+
+  <ng-template #loggedInBlock>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        Profile
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+  </ng-template>
+</mat-toolbar>
