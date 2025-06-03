@@ -11,16 +11,33 @@ export class AuthService {
 
   constructor(private http: HttpClient,
     private router: Router
-  ) {}
+  ) { }
 
-  
+
   login(email: string, password: string): Observable<{ token: string }> {
-   return this.http.post<{ token: string }>(`${environment.apiBaseUrl}/auth/login`, { email, password });
+    return this.http.post<{ token: string }>(`${environment.apiBaseUrl}/auth/login`, { email, password });
   }
 
   signup(userData: { name: string; email: string; password: string }) {
     return this.http.post(`${environment.apiBaseUrl}/auth/register`, userData);
   }
+
+
+  getProfile(): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(`${environment.apiBaseUrl}/auth/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+
+    
+  }
+
+
+
+
 
 
 }

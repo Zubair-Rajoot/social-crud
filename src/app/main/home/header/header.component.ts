@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     localStorage.removeItem('token');
     this.isLoggedIn = false;
-    this.router.navigate(['/login']); // Redirect to login
+    this.router.navigate(['/login']); 
     console.log('Logged out');
   }
 }

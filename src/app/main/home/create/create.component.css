@@ -1,0 +1,40 @@
+.create-post-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.create-post-card {
+  max-width: 800px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.file-upload-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.preview-container {
+  margin-bottom: 1.5rem;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}

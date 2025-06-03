@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +17,7 @@ export class SignupComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    //  private toastr: ToastrService
+    private toastr: ToastrService
 
   ) {
     this.signupForm = this.fb.group({
@@ -27,26 +27,27 @@ export class SignupComponent {
     });
   }
 
- onSubmit() {
-  console.log('Form Values:', this.signupForm.value);
-  console.log('Form Valid:', this.signupForm.valid);
+  onSubmit() {
+    console.log('Form Values:', this.signupForm.value);
+    console.log('Form Valid:', this.signupForm.valid);
 
-  if (this.signupForm.invalid) {
-    
-    // this.toastr.error('Please fill out the form correctly.', 'Signup Failed');
-    return;
-  }
+    if (this.signupForm.invalid) {
 
-  this.authService.signup(this.signupForm.value).subscribe({
-    next: () => {
-      //  this.toastr.success('You are successfully register!', 'Registered Successful');
-      this.router.navigate(['/login']);
-
-    },
-    error: (err) => {
-      this.errorMessage = err.error.message || 'Signup failed';
+      this.toastr.error('Please fill out the form correctly.', 'Signup Failed');
+      return;
     }
-  });
-}
+
+    this.authService.signup(this.signupForm.value).subscribe({
+      next: () => {
+        this.toastr.success('You are successfully register!', 'Registered Successful');
+        this.router.navigate(['/login']);
+
+      },
+      error: (err) => {
+        this.toastr.error(err.error.message || 'Signup failed', 'Error');
+        this.errorMessage = err.error.message || 'Signup failed';
+      }
+    });
+  }
 
 }

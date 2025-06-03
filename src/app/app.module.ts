@@ -25,10 +25,17 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AuthModule } from './main/auth/auth.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { HomeComponent } from './main/home/home/home.component';
+
 import {  MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HeaderComponent } from './main/home/header/header.component';
+
+import { CommonModule } from '@angular/common';
+import { HomeModule } from './main/home/home.module';
+
+
+import { ToastrModule } from 'ngx-toastr';
+
+
 
 
 
@@ -38,12 +45,17 @@ import { HeaderComponent } from './main/home/header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    HeaderComponent
-
+  
+   
+    
+   
     
   ],
   imports: [
+    BrowserModule,
+    HomeModule,
+    CommonModule,
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -69,6 +81,22 @@ import { HeaderComponent } from './main/home/header/header.component';
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
+
+
+
+
+
+     ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      timeOut: 4000,
+      progressBar: true,
+      closeButton: true,
+      preventDuplicates: true,
+      enableHtml: true,
+      tapToDismiss: false,
+      newestOnTop: true,
+      progressAnimation: 'decreasing'
+    }),
     
 
   

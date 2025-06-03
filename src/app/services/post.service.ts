@@ -19,4 +19,6 @@ export class PostService {
   createPost(postData: FormData): Observable<any> {
     return this.http.post(`${environment.apiBaseUrl}/post/create`, postData);
   }
+
+ 
 }
