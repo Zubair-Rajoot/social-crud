@@ -1,0 +1,31 @@
+<div class="post-form-container mat-elevation-z6">
+  <h2>{{ postId ? 'Update Post' : 'Create Post' }}</h2>
+
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" placeholder="Enter post title" />
+      <mat-error *ngIf="postForm.get('title')?.invalid">Title is required (min 3 chars)</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Content</mat-label>
+      <textarea matInput formControlName="content" rows="5" placeholder="Enter post content"></textarea>
+      <mat-error *ngIf="postForm.get('content')?.invalid">Content is required (min 10 chars)</mat-error>
+    </mat-form-field>
+
+    <div class="file-input">
+      <label for="imageUpload">Upload Image</label>
+      <input type="file" id="imageUpload" (change)="onFileSelected($event)" accept="image/*" />
+    </div>
+
+    <div class="image-preview" *ngIf="getImagePreview()">
+      <p>Preview:</p>
+      <img [src]="getImagePreview()" alt="Preview" />
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Submitting...' : postId ? 'Update Post' : 'Create Post' }}
+    </button>
+  </form>
+</div>

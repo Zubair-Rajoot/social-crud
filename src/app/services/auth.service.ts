@@ -14,9 +14,9 @@ export class AuthService {
   ) { }
 
 
-  login(email: string, password: string): Observable<{ token: string, userId: string  }> {
-    return this.http.post<{ token: string, userId: string  }>(`${environment.apiBaseUrl}/auth/login`, { email, password });
-    
+  login(email: string, password: string): Observable<{ token: string, userId: string }> {
+    return this.http.post<{ token: string, userId: string }>(`${environment.apiBaseUrl}/auth/login`, { email, password });
+
   }
 
   signup(userData: { name: string; email: string; password: string }) {
@@ -25,37 +25,37 @@ export class AuthService {
 
 
 
-uploadAvatar(formData: FormData) {
-  const token = localStorage.getItem('token');
-  return this.http.post(`${environment.apiBaseUrl}/auth/avatar`, formData, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-}
-
-
-getCurrentUserId(): string | null {
-  return localStorage.getItem('userId');
-}
-
-setCurrentUser(user: any): void {
-  localStorage.setItem('userId', user._id);
-  localStorage.setItem('userAvatar', user.avatar || '');
-}
-
-
-getAvatar(): Observable<{ success: boolean, avatar: string }> {
-  const token = localStorage.getItem('token');
-  return this.http.get<{ success: boolean, avatar: string }>(
-    `${environment.apiBaseUrl}/auth/avatar`,
-    {
+  uploadAvatar(formData: FormData) {
+    const token = localStorage.getItem('token');
+    return this.http.post(`${environment.apiBaseUrl}/auth/avatar`, formData, {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }
-  );
-}
+    });
+  }
+
+
+  getCurrentUserId(): string | null {
+    return localStorage.getItem('userId');
+  }
+
+  setCurrentUser(user: any): void {
+    localStorage.setItem('userId', user._id);
+    localStorage.setItem('userAvatar', user.avatar || '');
+  }
+
+
+  getAvatar(): Observable<{ success: boolean, avatar: string }> {
+    const token = localStorage.getItem('token');
+    return this.http.get<{ success: boolean, avatar: string }>(
+      `${environment.apiBaseUrl}/auth/avatar`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+  }
 
 
 
@@ -69,7 +69,7 @@ getAvatar(): Observable<{ success: boolean, avatar: string }> {
       }
     })
 
-    
+
   }
 
 

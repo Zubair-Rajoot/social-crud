@@ -1,28 +1,98 @@
+<app-header></app-header>
 
+<div class="home-container">
+  <div class="left-sidebar">
+    <mat-card class="profile-card">
+      <div class="profile-header">
+        <div class="avatar-container">
+          <img *ngIf="user?.avatar" [src]="'http://localhost:3000/uploads/avatars/' + user.avatar " alt="Profile"
+            class="avatar">
+          <mat-icon *ngIf="!user?.avatar" class="default-avatar">account_circle</mat-icon>
+        </div>
+        <h2>{{ user?.name || 'User Name' }}</h2>
+        <p class="email">{{ user?.email || 'user@example.com' }}</p>
+      </div>
 
-<div class="posts-container">
-  <div class="timeline">
-    <mat-card *ngFor="let post of posts" class="post-card mat-elevation-z4">
-      <mat-card-header>
-          <mat-card-title> {{ post.userId?.name || 'Unknown' }}</mat-card-title>
-        <mat-card-subtitle>{{ post.title }}</mat-card-subtitle>
-      </mat-card-header>
+      <div class="profile-details">
+        <div class="detail-item">
+          <mat-icon>work</mat-icon>
+          <span>Software Developer</span>
+        </div>
+        <div class="detail-item">
+          <mat-icon>location_on</mat-icon>
+          <span>Lahore, pakistan</span>
+        </div>
+        <div class="detail-item">
+          <mat-icon>link</mat-icon>
+          <a href="https://personal-portfolio-git-main-zubair-rajoots-projects.vercel.app/">My-Portfolio</a>
+        </div>
+      </div>
 
-      <img *ngIf="post.image"
-           mat-card-image
-           [src]="'http://localhost:3000/uploads/' + post.image"
-           alt="Post Image" />
+      <div class="profile-stats">
+        <div class="stat-item">
+          <span class="stat-number">5k</span>
+          <span class="stat-label">Connections</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">50</span>
+          <span class="stat-label">Followers</span>
+        </div>
+      </div>
 
-      <mat-card-content>
-        <p>{{ post.content }}</p>
-      </mat-card-content>
+      <button mat-stroked-button color="primary" class="profile-btn" routerLink="/profile">View Profile</button>
+    </mat-card>
+
+    <mat-card class="network-card">
+      <h3>Your Network</h3>
+      <div class="network-item" *ngFor="let item of [1,2,3]">
+        <div class="network-avatar">
+          <mat-icon>account_circle</mat-icon>
+        </div>
+        <div class="network-info">
+          <span class="network-name">Connection {{item}}</span>
+          <span class="network-title">Job Title {{item}}</span>
+        </div>
+      </div>
+
     </mat-card>
   </div>
-</div>
 
-<ng-template #noPosts>
-  <div class="no-posts">
-    <mat-icon>info</mat-icon>
-    <p>No posts found.</p>
+
+  <div class="main-content">
+    <div class="posts-container">
+      <div *ngIf="posts.length > 0; else noPosts" class="timeline">
+        <mat-card *ngFor="let post of posts" class="post-card mat-elevation-z4">
+          <mat-card-header>
+            <div class="post-avatar-container">
+              <img *ngIf="user?.avatar" [src]="'http://localhost:3000/uploads/avatars/' + user.avatar " alt="Profile"
+                class="avatar">
+              <mat-icon *ngIf="!user?.avatar" class="default-avatar">account_circle</mat-icon>
+              <mat-card-title>{{ post.userId?.name || 'Unknown' }}</mat-card-title>
+            </div>
+
+          </mat-card-header>
+
+          <img *ngIf="post.image" mat-card-image [src]="'http://localhost:3000/uploads/' + post.image"
+            alt="Post Image" />
+
+          <mat-card-content>
+            <p>{{ post.content }}</p>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-button><mat-icon>thumb_up</mat-icon> Like</button>
+            <button mat-button><mat-icon>comment</mat-icon> Comment</button>
+            <button mat-button><mat-icon>share</mat-icon> Share</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <ng-template #noPosts>
+        <div class="no-posts">
+          <mat-icon>info</mat-icon>
+          <p>No posts found.</p>
+        </div>
+      </ng-template>
+    </div>
   </div>
-</ng-template>
+</div>

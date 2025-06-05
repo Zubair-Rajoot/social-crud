@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PostService } from 'src/app/services/post.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +18,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private postService: PostService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -69,41 +72,49 @@ export class ProfileComponent implements OnInit {
 
 
 
-  // uploadAvatar() {
-  //   if (!this.selectedAvatar) return;
-
-  //   const formData = new FormData();
-  //   formData.append('avatar', this.selectedAvatar);
-
-  //   this.isUploading = true;
-  //   this.authService.uploadAvatar(formData).subscribe({
-  //     next: (res: any) => {
-  //       this.user = res.user;
-  //       this.isUploading = false;
-  //       this.snackBar.open('Avatar updated successfully!', 'Close', {
-  //         duration: 3000
-  //       });
-  //     },
-  //     error: (err) => {
-  //       this.isUploading = false;
-  //       this.snackBar.open('Error updating avatar', 'Close', {
-  //         duration: 3000
-  //       });
-  //     }
-  //   });
-  // }
-
-
-
   uploadAvatar(file: File) {
     const formData = new FormData();
-    formData.append('avatar', file); // "avatar" must match multer field name
+    formData.append('avatar', file); 
 
     this.authService.uploadAvatar(formData).subscribe({
       next: res => console.log('Upload success:', res),
       error: err => console.error('Upload error:', err)
     });
   }
+
+
+  
+
+deletePost(postId: string) {
+  if (confirm('Are you sure you want to delete this post?')) {
+    this.postService.deletePost(postId).subscribe({
+      next: (res) => {
+        this.posts = this.posts.filter(post => post._id !== postId);
+        this.snackBar.open('Post deleted successfully!', 'Close', { duration: 3000 });
+      },
+      error: () => {
+        this.snackBar.open('Failed to delete post', 'Close', { duration: 3000 });
+          
+      }
+    });
+  }
+}
+
+
+updatePost(postId: string) {
+
+    this.postService.deletePost(postId).subscribe({
+      next: (res) => {
+        this.posts = this.posts.filter(post => post._id !== postId);
+        this.snackBar.open('Post deleted successfully!', 'Close', { duration: 3000 });
+      },
+      error: () => {
+        this.snackBar.open('Failed to delete post', 'Close', { duration: 3000 });
+          
+      }
+    });
+  
+}
 
 
 

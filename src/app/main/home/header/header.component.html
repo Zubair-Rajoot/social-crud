@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" class="header-toolbar">
 
   <span class="logo">
-    
+
     <span class="logo-text">SocialApp</span>
   </span>
 
@@ -9,9 +9,9 @@
   <span class="spacer"></span>
 
 
-   <ng-container *ngIf="isLoggedIn">
+  <ng-container *ngIf="isLoggedIn">
     <button mat-button routerLink="/home">Home</button>
-   
+
   </ng-container>
 
   <ng-container *ngIf="!isLoggedIn; else loggedInBlock">
@@ -20,11 +20,9 @@
   </ng-container>
 
   <ng-template #loggedInBlock>
-   <button mat-icon-button [matMenuTriggerFor]="menu"
-        (menuOpened)="onMenuOpened()"
-        (menuClosed)="onMenuClosed()">
-  <mat-icon>account_circle</mat-icon>
-</button>
+    <button mat-icon-button [matMenuTriggerFor]="menu" (menuOpened)="onMenuOpened()" (menuClosed)="onMenuClosed()">
+      <mat-icon>account_circle</mat-icon>
+    </button>
 
 
     <mat-menu #menu="matMenu">
