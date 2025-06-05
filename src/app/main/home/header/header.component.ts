@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,18 +10,28 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
 
-  constructor(private router: Router) {}
+  @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-   
+
     const token = localStorage.getItem('token');
-    this.isLoggedIn = !!token; 
+    this.isLoggedIn = !!token;
   }
 
   logout(): void {
     localStorage.removeItem('token');
     this.isLoggedIn = false;
-    this.router.navigate(['/login']); 
-    console.log('Logged out');
+    this.router.navigate(['/login']);
+   
+  }
+
+  onMenuOpened() {
+    document.body.classList.add('no-scroll');
+  }
+
+  onMenuClosed() {
+    document.body.classList.remove('no-scroll');
   }
 }

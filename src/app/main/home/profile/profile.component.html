@@ -1,27 +1,45 @@
 <div *ngIf="user" class="profile-container mat-elevation-z8">
   <div class="profile-header">
-    <div class="avatar-container">
-      <mat-icon class="avatar-icon" *ngIf="!user.avatar">account_circle</mat-icon>
-      <img *ngIf="user.avatar" [src]="'http://localhost:3000/uploads/' + user.avatar" class="avatar-image">
+   <div class="avatar-container">
+  <input type="file" id="avatarUpload" (change)="onAvatarSelected($event)" accept="image/*" style="display: none;">
+  <label for="avatarUpload" class="avatar-upload-label" [class.loading]="isUploading">
+    <mat-spinner *ngIf="isUploading" diameter="40" class="upload-spinner"></mat-spinner>
+    
+    <div *ngIf="!isUploading">
+      <img *ngIf="user.avatar" 
+           [src]="'http://localhost:3000/uploads/avatars/' + user.avatar " 
+           class="avatar-image">
+      <mat-icon *ngIf="!user.avatar" class="avatar-icon">account_circle</mat-icon>
+      <mat-icon class="avatar-edit-icon">edit</mat-icon>
     </div>
+  </label>
+</div>
     <div class="profile-info">
       <h1 class="mat-display-1">{{ user.name }}</h1>
       <p class="mat-subheading-2">
         <mat-icon>email</mat-icon> {{ user.email }}
       </p>
-    
+      <p class="mat-body-1" *ngIf="user.bio">
+        <mat-icon>info</mat-icon> {{ user.bio }}
+      </p>
+      <p class="mat-caption">
+        Member since {{ user.createdAt | date:'mediumDate' }}
+      </p>
     </div>
   </div>
 
   <mat-divider></mat-divider>
 
   <div class="posts-section">
-    <h2 class="mat-headline">Your Posts</h2>
-    
-  
+    <div class="section-header">
+      <h2 class="mat-headline">Your Posts</h2>
+      <button mat-raised-button color="primary" routerLink="/create">
+        <mat-icon>add</mat-icon> Create New Post
+      </button>
+    </div>
 
-    <div class="posts-grid" *ngIf="posts.length > 0">
-      <mat-card *ngFor="let post of posts" class="post-card">
+    <div class="posts-grid" *ngIf="posts.length > 0; else noPosts">
+      <mat-card *ngFor="let post of posts" class="post-card mat-elevation-z4">
         <mat-card-header>
           <mat-card-title>{{ post.title }}</mat-card-title>
           <mat-card-subtitle>
@@ -37,27 +55,27 @@
         </mat-card-content>
         <mat-card-actions>
           <button mat-button color="primary">
-            <mat-icon>thumb_up</mat-icon> Like
+            <mat-icon>thumb_up</mat-icon> Like ({{ post.likes || 0 }})
           </button>
           <button mat-button color="primary">
-            <mat-icon>comment</mat-icon> Comment
+            <mat-icon>comment</mat-icon> Comments ({{ post.comments?.length || 0 }})
+          </button>
+          <button mat-button color="warn">
+            <mat-icon>delete</mat-icon> Delete
           </button>
         </mat-card-actions>
       </mat-card>
     </div>
 
-
+    <ng-template #noPosts>
       <div class="no-posts">
-      <mat-icon class="empty-icon">post_add</mat-icon>
-      <p class="mat-body-1">You haven't created any posts yet.</p>
-      <button mat-raised-button color="primary" routerLink="/create">
-        <mat-icon>add</mat-icon> Create Your First Post
-      </button>
-    </div>
-
-
-
-
+        <mat-icon class="empty-icon">post_add</mat-icon>
+        <p class="mat-body-1">You haven't created any posts yet.</p>
+        <button mat-raised-button color="primary" routerLink="/create">
+          <mat-icon>add</mat-icon> Create Your First Post
+        </button>
+      </div>
+    </ng-template>
   </div>
 </div>
 

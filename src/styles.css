@@ -1,4 +1,49 @@
 
+html, body {
+  overflow-x: hidden;
+}
+
+.mat-menu-panel {
+  max-width: 200px;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
+body.no-scroll {
+  overflow: hidden !important;
+}
+
+body.no-scroll {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+}
+
+
+.mat-menu-panel {
+  overflow: visible !important;
+  max-height: none !important;
+  max-width: 250px;  
+  box-sizing: border-box;
+}
+
+
+body, html, app-root {
+  width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+app-root {
+  overflow-x: hidden;
+}
+
+.cdk-overlay-container {
+  overflow-x: visible !important;
+}
+
+
+
 #toast-container.toast-top-right {
   top: 20px !important;
   right: 20px !important;

@@ -29,11 +29,6 @@ html {
   flex: 1 1 auto;
 }
 
-button {
-  margin-left: 12px;
-}
-
-
 
 :host {
   display: block;
@@ -50,4 +45,10 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+
+.mat-menu-panel {
+  max-width: 250px; 
+  overflow: visible !important;
 }

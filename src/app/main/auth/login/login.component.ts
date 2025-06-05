@@ -37,6 +37,7 @@ export class LoginComponent {
         next: (res) => {
           this.toastr.success('Login Successfully!', 'Success');
 
+          localStorage.setItem("userId", res.userId);
           localStorage.setItem('token', res.token);
 
           this.router.navigate(['/home']);

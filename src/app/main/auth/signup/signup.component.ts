@@ -28,9 +28,7 @@ export class SignupComponent {
   }
 
   onSubmit() {
-    console.log('Form Values:', this.signupForm.value);
-    console.log('Form Valid:', this.signupForm.valid);
-
+    
     if (this.signupForm.invalid) {
 
       this.toastr.error('Please fill out the form correctly.', 'Signup Failed');
